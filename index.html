@@ -4,5 +4,22 @@
     </head>
     <body>
         <h1>Robocharts </h1>
+        <p class="num_traded_today"></p>
+        <script>
+            async function getBitcoinPriceFromCoindesk() {
+                var data = await getData( "https://api.coindesk.com/v1/bpi/currentprice.json" );
+                if ( data == "error" ) return 0;
+                var json = JSON.parse( data );
+                var price = json[ "bpi" ][ "USD" ][ "rate_float" ];
+                return price;
+            }
+
+            (async()=>{
+                btc_price = await getBitcoinPriceFromCoindesk();
+                var num_traded_today = btc_price
+                $( '.num_traded_today' ).innerText = `${num_traded_today} btc`;
+            })();
+
+        </script>            
     </body>
 </html>
