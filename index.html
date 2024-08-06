@@ -34,7 +34,7 @@
                     resolve( returnable );
                 });
             }
-            
+
             async function getBitcoinPriceFromCoindesk() {
                 var data = await getData( "https://api.coindesk.com/v1/bpi/currentprice.json" );
                 if ( data == "error" ) return 0;
@@ -44,6 +44,7 @@
             }
 
             (async()=>{
+                var $ = document.querySelector.bind( document );
                 btc_price = await getBitcoinPriceFromCoindesk();
                 var num_traded_today = btc_price
                 $( '.num_traded_today' ).innerText = `${num_traded_today} btc`;
